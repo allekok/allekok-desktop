@@ -1,0 +1,35 @@
+{
+  "name": "allekok",
+  "version": "1.0.0",
+  "description": "Kurdish Poems",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "repository": "https://github.com/allekok/allekok-desktop",
+  "keywords": [
+    "allekok",
+    "kurdish",
+    "poetry",
+    "poem",
+    "literature"
+  ],
+  "author": "allekok",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^3.0.0",
+    "electron-builder": "^20.28.4"
+  },
+  "build": {
+  	"appId": "com.allekok.www",
+    "productName": "allekok",
+    "linux": {
+      "icon": "./icons",
+      "synopsis": "kurdish poems",
+      "category": "Education",
+      "maintainer": "allekok"
+    }
+  }
+}
