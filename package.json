@@ -30,6 +30,9 @@
       "synopsis": "kurdish poems",
       "category": "Education",
       "maintainer": "allekok"
+    },
+    "win": {
+      "icon": "./icons/icon.ico"
     }
   }
 }
