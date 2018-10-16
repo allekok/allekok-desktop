@@ -1,5 +1,6 @@
 //conts
 const loading = "<div class='loading'></div>";
+const progressBar = "<progress class='prb'></progress>";
 
 // index
 
@@ -240,19 +241,36 @@ function get_right_format_poet ( p ) {
 
 
 function get_book(p , b) {
+	var t = document.querySelector("#main");
+	t.innerHTML = progressBar;
+	var prb = document.querySelector(".prb");
+	
     var rp = get_right_format_poet (p);
     var rb = get_right_format_book (b);
 
     var uri = `https://allekok.com/dev/tools/poem.php?poet=${rp}&book=${rb}&poem=all&html` + "&preventCache="+Date.now();
     var http = new XMLHttpRequest();
-    http.onload = function() {
+	http.open("get", uri, true);
+	http.onprogress = function(pe) {
+		var contentLength;
+		if (pe.lengthComputable) {
+		contentLength = pe.total;
+		} else {
+		contentLength = parseInt(pe.target.getResponseHeader('x-con-len'));
+		}
+		prb.setAttribute("max", contentLength);
+		prb.setAttribute("value", pe.loaded);
+		console.log(contentLength);
+		console.log(pe.loaded);
+	}
+    http.onload = function(pe) {
         var localStorage_name = `book_${p}_${b}`;
         localStorage.setItem(localStorage_name, this.responseText);
         get_books_version(p,b);
         book(p , b);
     }
 
-    http.open("get", uri, true);
+    
     http.send();
 }
 
