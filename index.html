@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html lang="ckb" dir="rtl">
     <head>
@@ -11,7 +11,7 @@
     </head>
     <body style="animation:fade .5s;">
         <header>
-            <button type="button" onclick="check_poets_img_update_all();check_index_version();index();">
+            <button type="button" onclick="index();">
                 <h1>
                     ئاڵەکۆک
                 </h1>
@@ -19,13 +19,17 @@
         </header>
         <div id="main" style="animation:fade 1s">
             <div class='loading'></div>
+	        <script src="./allekok.js"></script>
+            <script>
+                check_poets_img_update_all();
+                check_index_version();
+                if(localStorage.getItem("last_location") != null) {
+                    last_location();
+                } else {
+                    index();
+                }
+            </script>
         </div>
-
-        <script src="./allekok.js"></script>
-        <script>
-          check_poets_img_update_all();
-          check_index_version();
-          index();
-        </script>
+        
     </body>
 </html>

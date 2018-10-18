@@ -41,6 +41,9 @@ function index(k = "dead") {
 
         t.innerHTML = res;
         t.style.animation = "fade .2s";
+
+        var location = {ki:"index", kind:k};
+        set_location(location);
     }
 }
 
@@ -173,6 +176,9 @@ function poet(p) {
 
     t.innerHTML = res;
     t.style.animation = "fade .2s";
+
+    var location = {ki:"poet",pt:_p};
+    set_location(location);
 }
 
 // book
@@ -224,6 +230,9 @@ function book(p , b) {
 
         t.innerHTML = res;
         t.style.animation = "fade .2s";
+
+        var location = {ki:"book",pt:p,bk:b};
+        set_location(location);
     }
 
 }
@@ -345,6 +354,9 @@ function poem (p , b , m) {
     t.innerHTML = res;
     t.style.animation = "fade .2s";
     get_fs();
+
+    var location = {ki:"poem",pt:p,bk:b,pm:m};
+    set_location(location);
 }
 
 // check for updates
@@ -800,4 +812,27 @@ function get_fs() {
       
       hhon.style.fontSize=lsfs+'px';
 	}
+}
+
+function set_location(obj) {
+    obj = JSON.stringify(obj);
+    localStorage.setItem("last_location" , obj);
+}
+function last_location() {
+    var ll = localStorage.getItem("last_location");
+    if(ll == null)  return;
+    ll = JSON.parse(ll);
+
+    if( ll["ki"] == "index" ) {
+        index(ll["kind"]);
+    }
+    else if( ll["ki"] == "poet" ) {
+        poet(ll["pt"]);
+    }
+    else if( ll["ki"] == "book" ) {
+        book(ll["pt"] , ll["bk"]);
+    }
+    else if( ll["ki"] == "poem" ) {
+        poem(ll["pt"], ll["bk"], ll["pm"]);
+    }
 }
