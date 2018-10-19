@@ -23,13 +23,16 @@ function index(k = "dead") {
 
         idx = JSON.parse(idx);
 
+        var arr = [];
         for(var p = 0; p<idx.length; p++) {
 
             if(k == idx[p].kind) {
                 res += `<div role='button' onclick='poet(${p})' class='poet'>
-                <img src='${poet_img(p)}' alt='${idx[p].profname}'>
+                <img id='${p}' src='' alt='${idx[p].profname}'>
                 <h3>${idx[p].takh}</h3>
                 </div>`;
+
+                arr.push(p);
             }
         }
 
@@ -47,6 +50,8 @@ function index(k = "dead") {
 
         var location = {ki:"index", kind:k};
         set_location(location);
+
+        poet_imgs(arr);
     }
 }
 
@@ -81,7 +86,7 @@ function get_index() {
         var res = this.responseText;
 
         localStorage.setItem("index", res);
-        get_index_verssion();
+        get_index_version();
         index();
     }
 
@@ -146,7 +151,7 @@ function poet(p) {
 
     res += `<div>
     <div id='poet_pic'>
-    <img src='${poet_img(_p)}' alt='${p.profname}'>
+    <img id='${_p}' src='' alt='${p.profname}'>
     </div>
     <div id='adrs'>
     <button type='button' onclick='index()'>
@@ -182,6 +187,8 @@ function poet(p) {
 
     var location = {ki:"poet",pt:_p};
     set_location(location);
+
+    poet_img(_p);
 }
 
 // book
@@ -207,7 +214,7 @@ function book(p , b) {
 
           res += `<div>
           <div id='poet_pic'>
-          <img src='${poet_img(p)}' alt='${pt.profname}'>
+          <img id='${p}' src='' alt='${pt.profname}'>
           </div>
           <div id='book_info'>
           <div id='adrs'>
@@ -238,6 +245,8 @@ function book(p , b) {
 
           var location = {ki:"book",pt:p,bk:b};
           set_location(location);
+
+          poet_img(p);
       }
     });
 
@@ -323,7 +332,7 @@ function poem (p , b , m) {
       res += `<div>
       <div id='poem_info'>
       <div id='poet_pic'>
-      <img src='${poet_img(p)}' alt='${pt.profname}'>
+      <img id='${p}' src='' alt='${pt.profname}'>
       </div>
       <div id='adrs'>
       <button type='button' onclick='index()'>
@@ -361,6 +370,8 @@ function poem (p , b , m) {
 
       var location = {ki:"poem",pt:p,bk:b,pm:m};
       set_location(location);
+
+      poet_img(p);
     });
 
 }
@@ -582,17 +593,28 @@ function search_books (q , pt="all", bk_num=10, k=1, san=0) {
 
 // tools
 
+function poet_imgs ( arr ) {
+  arr.forEach(function(p) {
+    poet_img(p);
+  });
+}
+
 function poet_img(p) {
   if(localStorage.getItem("index")==null) return;
-  var img = localStorage.getItem(`img_${p}`);
-  var idx = JSON.parse(localStorage.getItem("index"));
-  if(img == null) {
-    get_poet_img(p);
-    return idx[p].img._130x130;
-  }
-  else {
-    return "data:image/jpeg;base64," + img;
-  }
+  var dist = document.getElementById(`${p}`);
+
+  ldb.get(`img_${p}` , function(img) {
+
+    if(img == null) {
+      get_poet_img(p);
+      var idx = JSON.parse(localStorage.getItem("index"));
+      dist.src = idx[p].img._130x130;
+    }
+    else {
+      dist.src = "data:image/jpeg;base64," + img;
+    }
+  });
+
 }
 
 function get_poet_img (p) {
@@ -602,7 +624,7 @@ function get_poet_img (p) {
   var uri = `https://allekok.com/dev/tools/img-to-b64.php?pt=${rp}` + "&preventCache="+Date.now();
   var http = new XMLHttpRequest();
   http.onload = function () {
-    localStorage.setItem(`img_${p}`, this.responseText);
+    ldb.set(`img_${p}`, this.responseText);
     if(p==0) get_poet_img_version();
   }
   http.open("get" , uri);
@@ -659,7 +681,7 @@ function update_poet_img (p, new_ver) {
   var uri = `https://allekok.com/dev/tools/img-to-b64.php?pt=${rp}` + "&preventCache="+Date.now();
   var http = new XMLHttpRequest();
   http.onload = function () {
-    localStorage.setItem(`img_${p}`, this.responseText);
+    ldb.set(`img_${p}`, this.responseText);
     localStorage.setItem(`imgs_update_version` , new_ver );
   }
   http.open("get" , uri);
