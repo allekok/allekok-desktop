@@ -6,11 +6,11 @@ html, body {
 
 body {
   margin:0;
-  font-family:'kurd';
+  font-family:'kurd', arial;
   font-size: 12px;
   background-color:#fafafa;
   box-sizing: border-box;
-  line-height:2.5em;
+  line-height:2.3;
 }
 
 div, header, footer, h1, h2, h3, a, img, button {
