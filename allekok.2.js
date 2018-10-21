@@ -1,6 +1,11 @@
+/* what a useful thing! */
+function null_func(n) {
+  return null;
+}
+
 /* use case: download poets, books, poems, updates , etc. */
 
-function download( uri , onload=null , onprogress=null , onerror=null ) {
+function download( uri , onload=null_func , onprogress=null_func , onerror=null_func ) {
   var client = new XMLHttpRequest();
 
   client.open( "get" , uri );
@@ -74,7 +79,7 @@ function get_from_localStorage (title) {
 }
 
 /* retrieve content from indexedDB , (asynchronous) */
-function get_from_indexedDB (title , callback) {
+function get_from_IndexedDB (title , callback) {
   ldb.get( title , callback() );
 }
 
@@ -86,9 +91,62 @@ function get (method , title , callback) {
     return get_from_localStorage(title);
   }
   else if (method === "indexeddb") {
-    get_from_indexedDB(title , callback);
+    get_from_IndexedDB(title , callback);
   }
   else {
     error("get function, method is undefined.")
   }
+}
+
+/***********************************************************/
+
+/* first thing that we need to do is download poets. one by one for now. */
+
+/*function download_poet( p , callback ) {
+  download_poet_meta(p , callback);
+  download_poet_image(p , callback);
+}*/
+
+/* download meta data about one poet defined by "p", the ID. */
+function download_poet_meta ( p , callback ) {
+  var uri = "https://allekok.com/dev/tools/poet.php";
+  var request = `poet=${p}`;
+  uri = build_url( uri , request , true );
+
+  download( uri , function(res) {
+    set_poet_meta_to_localStorage(p , res , callback);
+  });
+}
+
+/* title = `${p}` */
+function set_poet_meta_to_localStorage ( p , res , callback ) {
+  set("localStorage" , p , res);
+  callback();
+}
+
+/* download poet's image defined by his ID */
+function download_poet_image( p , callback ) {
+  var uri = "https://allekok.com/dev/tools/img-to-b64.php";
+  var request = `pt=${p}`;
+  uri = build_url(uri , request , true);
+
+  download( uri , function(res) {
+    set_poet_image_to_IndexedDB( p , res , callback);
+  });
+}
+
+/* title = `img_${p}` */
+function set_poet_image_to_IndexedDB(p , res , callback) {
+  set("IndexedDB" , `img_${p}` , res);
+  callback();
+}
+
+function download_all_poets_meta ( k , callback ) {
+  var uri = "https://allekok.com/dev/tools/poet.php";
+  var request = `poet=all&k=${k}`;
+  uri = build_url(uri , request , true);
+
+  download( uri , function(res) {
+    set_all_poets_meta_to_localStorage(res , callback);
+  });
 }
