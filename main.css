@@ -6,11 +6,11 @@ html, body {
 
 body {
   margin:0;
-  font-family:'kurd', arial;
+  font-family:'kurd';
   font-size: 12px;
   background-color:#fafafa;
   box-sizing: border-box;
-  line-height:2.3;
+  line-height:2.5;
 }
 
 div, header, footer, h1, h2, h3, a, img, button {
@@ -73,10 +73,9 @@ header h1 {
   max-width: 100px;
   margin:1em 1%;
   cursor:pointer;
-  border-radius:10px;
 }
 .poet:hover {
-  background-color:#eee;
+  opacity:.8;
 }
 .poet img {
   width:100%;
@@ -154,9 +153,9 @@ footer a:hover, footer button:hover {
   box-shadow: 0 0 10px #eee;
 }
 #poet_books p {
-  font-size: 1.3em;
+  font-size: 1.4rem;
   border-bottom:1px solid #eee;
-  padding:.5em 0;
+  padding:1em 0;
   background-color: #f9f9f9;
 }
 #poet_books button {
@@ -164,7 +163,7 @@ footer a:hover, footer button:hover {
   display: block;
   text-align: center;
   width: 100%;
-  padding:1em 0;
+  padding:1.5em 0;
   color: #000;
   border-bottom:1px solid #f4f4f4;
 }
@@ -288,10 +287,4 @@ footer a:hover, footer button:hover {
 #poem_tools button:active {
   background-color:#ddd;
 }
-.prb {
-  width: 50%;
-  max-width: 350px;
-  display: block;
-  margin: 1em auto;
-	height:2em;
-}
+
