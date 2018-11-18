@@ -40,7 +40,7 @@ function index(k = "dead") {
                 بەیتی کوردی
             </button>
         </footer>`;
-
+	document.querySelector("header").style.borderTop = `.6em solid transparent`;
         t.innerHTML = res;
         t.style.animation = "fade .2s";
     }
@@ -172,7 +172,8 @@ function poet(p) {
     }
 
     res += `</div>`;
-
+    
+    document.querySelector("header").style.borderTop = `.6em solid ${p.colors[0]}`;
     t.innerHTML = res;
     t.style.animation = "fade .2s";
 }
