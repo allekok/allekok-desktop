@@ -11,21 +11,25 @@
     </head>
     <body style="animation:fade .5s;">
         <header>
-            <button type="button" onclick="check_poets_img_update_all();check_index_version();index();">
+            <button type="button" onclick="index();">
                 <h1><span style='color:rgb(0,210,50)'>
                   ئاڵە</span>کۆک
                 </h1>
             </button>
         </header>
         <div id="main" style="animation:fade 1s">
-            <div class='loading'></div>
+        	<div class='loading'></div>
+		<script src="./allekok.js"></script>
+		<script>
+		        if(localStorage.getItem("last_location") != null) {
+		            last_location();
+		        } else {
+		            index();
+		        }
+		        check_poets_img_update_all();
+		        check_index_version();
+		</script>
         </div>
 
-        <script src="./allekok.js"></script>
-        <script>
-          check_poets_img_update_all();
-          check_index_version();
-          index();
-        </script>
     </body>
 </html>
