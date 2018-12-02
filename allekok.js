@@ -650,7 +650,7 @@ function num_convert(inp) {
 function san_data(inp , lastChance=false) {
     if (inp == "")  return "";
 
-    var extras = [/&laquo;/g,/&raquo;/g,/&rsaquo;/g,/&lsaquo;/g,/&bull;/g,/&nbsp;/g,/\?/g, /!/g, /#/g, /&/g, /\*/g, /\(/g, /\)/g, /-/g, /\+/g, /=/g, /_/g,/\[/g, /\]/g, /{/g, /}/g,/</g,/>/g, /\//g, /\|/, /\'/g, /\"/g, /;/g, /:/g, /,/g, /\./g, /~/g, /`/g,/؟/g, /،/g, /»/g, /«/g, /ـ/g, /›/g, /‹/g, /•/g, /‌/g,
+    var extras = [/&laquo;/g,/&raquo;/g,/&rsaquo;/g,/&lsaquo;/g,/&bull;/g,/&nbsp;/g,/\?/g, /!/g, /#/g, /&/g, /\*/g, /\(/g, /\)/g, /-/g, /\+/g, /=/g, /_/g,/\[/g, /\]/g, /{/g, /}/g,/</g,/>/g, /\//g, /\|/, /\'/g, /\"/g, /;/g, /:/g, /,/g, /\./g, /~/g, /`/g,/؟/g, /،/g, /»/g, /«/g, /ـ/g, /›/g, /‹/g, /•/g, /‌/g, /\s+/g, 
     /؛/g,
     ];
     var ar_signs =['ِ', 'ُ', 'ٓ', 'ٰ', 'ْ', 'ٌ', 'ٍ', 'ً', 'ّ', 'َ'];
