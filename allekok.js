@@ -30,7 +30,7 @@ function index(k = "dead") {
             if(k == idx[p].kind) {
                 res += `<div role='button' onclick='poet(${p})' class='poet'>
                 <img id='${p}' src='back.jpg' alt='${idx[p].profname}'>
-                <h3>${idx[p].takh}</h3>
+                <h3 title='${idx[p].profname}'>${idx[p].takh}</h3>
                 </div>`;
 
 		arr.push(p);
