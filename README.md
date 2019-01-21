@@ -38,4 +38,4 @@ yarn dist --win --x64 exe
 # mac os
 yarn dist --mac --x64 dmg
 ```
-For more information on how to build more distributions check out: https://github.com/electron-userland/electron-builder  
+For more information on how to build distributions check out: https://github.com/electron-userland/electron-builder  
