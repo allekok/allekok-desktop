@@ -28,12 +28,12 @@ function index(k = "dead") {
         for(var p = 0; p<idx.length; p++) {
 
             if(k == idx[p].kind) {
-                res += `<div role='button' onclick='poet(${p})' class='poet'>
-                <img id='${p}' src='back.jpg' alt='${idx[p].profname}'>
+                res += `<div role='button' onclick='poet(${idx[p].id})' class='poet'>
+                <img id='${idx[p].id}' src='back.jpg' alt='${idx[p].profname}'>
                 <h3 title='${idx[p].profname}'>${idx[p].takh}</h3>
                 </div>`;
 
-		arr.push(p);
+		arr.push(idx[p].id);
             }
         }
 
@@ -116,14 +116,7 @@ function bayt() {
     var idx = localStorage.getItem("index");
     if(idx == null || ! index_valid() ) return;
 
-    idx = JSON.parse(idx);
-
-    for(var i in idx) {
-        if(idx[i].id == 73) {
-            poet(i);
-            break;
-        }
-    }
+    poet(73);
 }
 
 // poet
@@ -144,7 +137,12 @@ function poet(p) {
     }
 
     idx = JSON.parse(idx);
-    p = idx[p];
+    for(var i in idx) {
+	if(idx[i].id == p) {
+	    p=idx[i];
+	    break;
+	}
+    }
 
     if(p == null) {
         index();
@@ -156,10 +154,6 @@ function poet(p) {
     <img id='${_p}' src='back.jpg' alt='${p.profname}'>
     </div>
     <div id='adrs'>
-    <button type='button' onclick='index()'>
-    ئاڵەکۆک
-    </button>
-    &rsaquo;
     <div id='current_location'>${p.profname}</div>
     </div>
     <div id='poet_books'>
@@ -170,7 +164,7 @@ function poet(p) {
 
     var bks = p.bks;
     for(var b = 0; b < bks.length; b++) {
-        res += `<button type='button' onclick='check_books_version(${_p},${b});book(${_p},${b});'>${bks[b]}</button>`;
+        res += `<button type='button' onclick='check_books_version(${_p},${b});book(${_p},${b});'>${bks[b]}</button>`; 
     }
 
     res += `</div>
@@ -211,8 +205,14 @@ function book(p , b) {
       }
       else if( isJSON(bk) ) {
 
+	  var idx = JSON.parse(localStorage.getItem("index"));
           bk = JSON.parse(bk);
-          pt = JSON.parse(localStorage.getItem("index"))[p];
+	  for(var i in idx) {
+	      if(idx[i].id == p) {
+		  pt=idx[i];
+		  break;
+	      }
+	  }
 
           res += `<div>
           <div id='poet_pic'>
@@ -220,10 +220,6 @@ function book(p , b) {
           </div>
           <div id='book_info'>
           <div id='adrs'>
-          <button type='button' onclick='index()'>
-          ئاڵەکۆک
-          </button>
-          &rsaquo;
           <button type='button' onclick='poet(${p})'>
           ${bk.poet}
           </button>
@@ -242,6 +238,7 @@ function book(p , b) {
 
           res += `</div>`;
 
+	  document.querySelector("header").style.borderTop = `.6em solid ${pt.colors[0]}`;
           t.innerHTML = res;
           t.style.animation = "fade .2s";
 
@@ -270,10 +267,9 @@ function get_book(p , b) {
 	t.innerHTML = progressBar;
 	var prb = document.querySelector(".prb");
 
-    var rp = get_right_format_poet (p);
     var rb = get_right_format_book (b);
 
-    var uri = `https://allekok.com/dev/tools/poem.php?poet=${rp}&book=${rb}&poem=all&html` + "&preventCache="+Date.now();
+    var uri = `https://allekok.com/dev/tools/poem.php?poet=${p}&book=${rb}&poem=all&html` + "&preventCache="+Date.now();
     var http = new XMLHttpRequest();
 	http.open("get", uri, true);
 	http.onprogress = function(pe) {
@@ -292,7 +288,6 @@ function get_book(p , b) {
         get_books_version(p,b);
         book(p , b);
     }
-
 
     http.send();
 }
@@ -314,10 +309,10 @@ function poem (p , b , m) {
     var localStorage_name = `book_${p}_${b}`;
 
     ldb.get(localStorage_name , function(bk) {
-      bk = JSON.parse(bk);
-      var pm = bk.poems[m];
+	bk = JSON.parse(bk);
+	var pm = bk.poems[m];
 
-      var res = "";
+	var res = "";
       var t = document.querySelector("#main");
       t.style.animation = "none";
       void t.offsetWidth;
@@ -327,19 +322,20 @@ function poem (p , b , m) {
           return;
       }
 
-      pt = JSON.parse(localStorage.getItem("index"))[p];
-
-
-      res += `<div>
+	var idx = JSON.parse(localStorage.getItem("index"));
+	for(var i in idx) {
+	    if(idx[i].id == p) {
+		var pt=idx[i];
+		break;
+	    }
+	}
+	
+	res += `<div>
       <div id='poem_info'>
       <div id='poet_pic'>
       <img id='${p}' src='back.jpg' alt='${pt.profname}'>
       </div>
       <div id='adrs'>
-      <button type='button' onclick='index()'>
-      ئاڵەکۆک
-      </button>
-      &rsaquo;
       <button type='button' onclick='poet(${p})'>${bk.poet}</button>
       &rsaquo;
       <button type='button' onclick='book(${p},${b})'>${bk.book}</button>
@@ -365,7 +361,8 @@ function poem (p , b , m) {
       	res += `<div id='poem_desc'>${pm.hdesc}</div>`;
       }
 
-      t.innerHTML = res;
+	document.querySelector("header").style.borderTop = `.6em solid ${pt.colors[0]}`;
+	t.innerHTML = res;
       t.style.animation = "fade .2s";
       get_fs();
 
@@ -435,9 +432,8 @@ function check_books_version ( p , b ) {
 }
 
 function check_book_version( p , b , new_ver ,old_ver ) {
-  var rp = get_right_format_poet(p);
   var rb = get_right_format_book(b);
-  var uri = `https://allekok.com/desktop/update/books/update-log.php?ver=${old_ver}&pt=${rp}&bk=${rb}` + "&preventCache="+Date.now();
+  var uri = `https://allekok.com/desktop/update/books/update-log.php?ver=${old_ver}&pt=${p}&bk=${rb}` + "&preventCache="+Date.now();
   var http = new XMLHttpRequest();
 
   http.onload = function () {
@@ -452,9 +448,8 @@ function check_book_version( p , b , new_ver ,old_ver ) {
 
 function update_book(p,b,new_ver) {
   var localStorage_baseName = `book_${p}_${b}`;
-  var rp = get_right_format_poet(p);
   var rb = get_right_format_book(b);
-  var uri = `https://allekok.com/dev/tools/poem.php?poet=${rp}&book=${rb}&poem=all&html` + "&preventCache="+Date.now();
+  var uri = `https://allekok.com/dev/tools/poem.php?poet=${p}&book=${rb}&poem=all&html` + "&preventCache="+Date.now();
   var http = new XMLHttpRequest();
 
   http.onload = function () {
@@ -607,9 +602,9 @@ function poet_img(p) {
   ldb.get(`img_${p}` , function(img) {
 
     if(img == null) {
-      get_poet_img(p);
+      get_poet_img(p,dist);
       var idx = JSON.parse(localStorage.getItem("index"));
-      dist.src = idx[p].img._130x130;
+//      dist.src = idx[p].img._130x130;
     }
     else {
       dist.src = "data:image/jpeg;base64," + img;
@@ -618,15 +613,16 @@ function poet_img(p) {
 
 }
 
-function get_poet_img (p) {
+function get_poet_img (p,dist) {
 
   var idx = JSON.parse(localStorage.getItem("index"));
-  var rp =get_right_format_poet(p);
-  var uri = `https://allekok.com/dev/tools/img-to-b64.php?pt=${rp}` + "&preventCache="+Date.now();
+//  var rp =get_right_format_poet(p);
+  var uri = `https://allekok.com/dev/tools/img-to-b64.php?pt=${p}` + "&preventCache="+Date.now();
   var http = new XMLHttpRequest();
   http.onload = function () {
-    ldb.set(`img_${p}`, this.responseText);
-    if(p==0) get_poet_img_version();
+      ldb.set(`img_${p}`, this.responseText);
+      if(dist !==null) dist.src = "data:image/jpeg;base64," + this.responseText;
+      get_poet_img_version();
   }
   http.open("get" , uri);
   http.send();
@@ -652,19 +648,19 @@ function check_poets_img_update_all () {
   http = new XMLHttpRequest();
   http.onload = function () {
     var new_ver = parseInt(this.responseText);
-    for(var p in idx) {
       if(old_ver != new_ver) {
-        check_poet_img_update(p , new_ver, old_ver);
+	  for(var p in idx) {
+              check_poet_img_update(idx[p].id , new_ver, old_ver);
+	  }
       }
-    }
   }
   http.open("get" , uri);
   http.send();
 }
 
 function check_poet_img_update(p , new_ver, old_ver) {
-  var rp = get_right_format_poet(p);
-  var uri = `https://allekok.com/desktop/update/imgs/update-log.php?ver=${old_ver}&pt=${rp}` + "&preventCache="+Date.now();
+//  var rp = get_right_format_poet(p);
+  var uri = `https://allekok.com/desktop/update/imgs/update-log.php?ver=${old_ver}&pt=${p}` + "&preventCache="+Date.now();
   var http = new XMLHttpRequest();
   http.onload = function () {
     if(this.responseText == "true") {
@@ -678,8 +674,7 @@ function check_poet_img_update(p , new_ver, old_ver) {
 function update_poet_img (p, new_ver) {
 
   var idx = JSON.parse(localStorage.getItem("index"));
-  var rp =get_right_format_poet(p);
-  var uri = `https://allekok.com/dev/tools/img-to-b64.php?pt=${rp}` + "&preventCache="+Date.now();
+  var uri = `https://allekok.com/dev/tools/img-to-b64.php?pt=${p}` + "&preventCache="+Date.now();
   var http = new XMLHttpRequest();
   http.onload = function () {
     ldb.set(`img_${p}`, this.responseText);
