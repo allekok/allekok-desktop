@@ -65,8 +65,8 @@ function index_valid() {
 
     if( ! isJSON(idx) ) return false;
     /*
-    * more validation tests.
-    */
+     * more validation tests.
+     */
 
     return true;
 }
@@ -100,14 +100,14 @@ function get_index() {
 }
 
 function get_index_version() {
-  var uri = "https://allekok.com/desktop/update/index/update-version.txt" + "?preventCache="+Date.now();
-  var http = new XMLHttpRequest();
-  http.onload = function () {
-    localStorage.setItem("index_update_version" , parseInt(this.responseText) );
-  }
+    var uri = "https://allekok.com/desktop/update/index/update-version.txt" + "?preventCache="+Date.now();
+    var http = new XMLHttpRequest();
+    http.onload = function () {
+	localStorage.setItem("index_update_version" , parseInt(this.responseText) );
+    }
 
-  http.open("get" , uri );
-  http.send();
+    http.open("get" , uri );
+    http.send();
 }
 
 // bayt
@@ -192,29 +192,29 @@ function poet(p) {
 
 function book(p , b) {
     var localStorage_name = `book_${p}_${b}`;
-     var t = document.querySelector("#main");
+    var t = document.querySelector("#main");
     t.style.animation = "none";
     void t.offsetWidth;
     t.innerHTML = loading;
 
     ldb.get(localStorage_name , function(bk) {
-      res = "";
+	res = "";
 
-      if( bk == null ) {
-          get_book(p , b);
-      }
-      else if( isJSON(bk) ) {
+	if( bk == null ) {
+            get_book(p , b);
+	}
+	else if( isJSON(bk) ) {
 
-	  var idx = JSON.parse(localStorage.getItem("index"));
-          bk = JSON.parse(bk);
-	  for(var i in idx) {
-	      if(idx[i].id == p) {
-		  pt=idx[i];
-		  break;
-	      }
-	  }
+	    var idx = JSON.parse(localStorage.getItem("index"));
+            bk = JSON.parse(bk);
+	    for(var i in idx) {
+		if(idx[i].id == p) {
+		    pt=idx[i];
+		    break;
+		}
+	    }
 
-          res += `<div>
+            res += `<div>
           <div id='poet_pic'>
           <img id='${p}' src='back.jpg' alt='${pt.profname}'>
           </div>
@@ -230,23 +230,23 @@ function book(p , b) {
           </div>
           <div id='book_poems'>`;
 
-          var poems = bk.poems;
+            var poems = bk.poems;
 
-          for(var m = 0; m < poems.length; m++) {
-              res += `<button class='pm' type='button' onclick='poem(${p},${b},${m})'>${num_convert(poems[m].id)}. ${poems[m].name}</button>`;
-          }
+            for(var m = 0; m < poems.length; m++) {
+		res += `<button class='pm' type='button' onclick='poem(${p},${b},${m})'>${num_convert(poems[m].id)}. ${poems[m].name}</button>`;
+            }
 
-          res += `</div>`;
+            res += `</div>`;
 
-	  document.querySelector("header").style.borderTop = `.6em solid ${pt.colors[0]}`;
-          t.innerHTML = res;
-          t.style.animation = "fade .2s";
+	    document.querySelector("header").style.borderTop = `.6em solid ${pt.colors[0]}`;
+            t.innerHTML = res;
+            t.style.animation = "fade .2s";
 
-          var location = {ki:"book",pt:p,bk:b};
-          set_location(location);
+            var location = {ki:"book",pt:p,bk:b};
+            set_location(location);
 
-          poet_img(p);
-      }
+            poet_img(p);
+	}
     });
 
 }
@@ -263,25 +263,25 @@ function get_right_format_poet ( p ) {
 }
 
 function get_book(p , b) {
-	var t = document.querySelector("#main");
-	t.innerHTML = progressBar;
-	var prb = document.querySelector(".prb");
+    var t = document.querySelector("#main");
+    t.innerHTML = progressBar;
+    var prb = document.querySelector(".prb");
 
     var rb = get_right_format_book (b);
 
     var uri = `https://allekok.com/dev/tools/poem.php?poet=${p}&book=${rb}&poem=all&html` + "&preventCache="+Date.now();
     var http = new XMLHttpRequest();
-	http.open("get", uri, true);
-	http.onprogress = function(pe) {
-		var contentLength;
-		if (pe.lengthComputable) {
-		contentLength = pe.total;
-		} else {
-		contentLength = parseInt(pe.target.getResponseHeader('x-con-len'));
-		}
-		prb.setAttribute("max", contentLength);
-		prb.setAttribute("value", pe.loaded);
+    http.open("get", uri);
+    http.onprogress = function(pe) {
+	var contentLength;
+	if (pe.lengthComputable) {
+	    contentLength = pe.total;
+	} else {
+	    contentLength = parseInt(pe.target.getResponseHeader('x-con-len'));
 	}
+	prb.setAttribute("max", contentLength);
+	prb.setAttribute("value", pe.loaded);
+    }
     http.onload = function(pe) {
         var localStorage_name = `book_${p}_${b}`;
         ldb.set(localStorage_name, this.responseText);
@@ -293,14 +293,14 @@ function get_book(p , b) {
 }
 
 function get_books_version( p , b ) {
-  var uri = "https://allekok.com/desktop/update/books/update-version.txt" + "?preventCache="+Date.now();
-  var http = new XMLHttpRequest();
-  http.onload = function () {
-    localStorage.setItem(`book_${p}_${b}_update_version` , parseInt(this.responseText) );
-  }
+    var uri = "https://allekok.com/desktop/update/books/update-version.txt" + "?preventCache="+Date.now();
+    var http = new XMLHttpRequest();
+    http.onload = function () {
+	localStorage.setItem(`book_${p}_${b}_update_version` , parseInt(this.responseText) );
+    }
 
-  http.open("get" , uri );
-  http.send();
+    http.open("get" , uri );
+    http.send();
 }
 
 // poem
@@ -313,14 +313,14 @@ function poem (p , b , m) {
 	var pm = bk.poems[m];
 
 	var res = "";
-      var t = document.querySelector("#main");
-      t.style.animation = "none";
-      void t.offsetWidth;
+	var t = document.querySelector("#main");
+	t.style.animation = "none";
+	void t.offsetWidth;
 
-      if(pm == null) {
-          book(p,b);
-          return;
-      }
+	if(pm == null) {
+            book(p,b);
+            return;
+	}
 
 	var idx = JSON.parse(localStorage.getItem("index"));
 	for(var i in idx) {
@@ -357,19 +357,19 @@ function poem (p , b , m) {
       </button>
       </div>
       <div id='poem_context'>${pm.hon}</div>`;
-      if(pm.hdesc != "") {
-      	res += `<div id='poem_desc'>${pm.hdesc}</div>`;
-      }
+	if(pm.hdesc != "") {
+      	    res += `<div id='poem_desc'>${pm.hdesc}</div>`;
+	}
 
 	document.querySelector("header").style.borderTop = `.6em solid ${pt.colors[0]}`;
 	t.innerHTML = res;
-      t.style.animation = "fade .2s";
-      get_fs();
+	t.style.animation = "fade .2s";
+	get_fs();
 
-      var location = {ki:"poem",pt:p,bk:b,pm:m};
-      set_location(location);
+	var location = {ki:"poem",pt:p,bk:b,pm:m};
+	set_location(location);
 
-      poet_img(p);
+	poet_img(p);
     });
 
 }
@@ -380,85 +380,85 @@ function poem (p , b , m) {
 
 // work with this
 function check_index_version() {
-  var idx = localStorage.getItem("index");
-  if( idx == null || ! index_valid() ) return;
+    var idx = localStorage.getItem("index");
+    if( idx == null || ! index_valid() ) return;
 
-  var uri = "https://allekok.com/desktop/update/index/update-version.txt" + "?preventCache="+Date.now();;
-  var http = new XMLHttpRequest();
-  http.onload = function () {
-    var old_ver = localStorage.getItem("index_update_version") || 0;
-    var new_ver = parseInt(this.responseText);
+    var uri = "https://allekok.com/desktop/update/index/update-version.txt" + "?preventCache="+Date.now();;
+    var http = new XMLHttpRequest();
+    http.onload = function () {
+	var old_ver = localStorage.getItem("index_update_version") || 0;
+	var new_ver = parseInt(this.responseText);
 
-    if(old_ver == new_ver)  return;
+	if(old_ver == new_ver)  return;
 
-    update_index(new_ver);
-  }
+	update_index(new_ver);
+    }
 
-  http.open("get" , uri);
-  http.send();
+    http.open("get" , uri);
+    http.send();
 }
 
 function update_index( new_ver ) {
-  var uri = `https://allekok.com/dev/tools/poet.php?poet=all` + "&preventCache="+Date.now();
-  var http = new XMLHttpRequest();
-  http.onload = function() {
-    var res = this.responseText;
-    localStorage.setItem("index", res);
-    localStorage.setItem("index_update_version" , new_ver);
-  }
+    var uri = `https://allekok.com/dev/tools/poet.php?poet=all` + "&preventCache="+Date.now();
+    var http = new XMLHttpRequest();
+    http.onload = function() {
+	var res = this.responseText;
+	localStorage.setItem("index", res);
+	localStorage.setItem("index_update_version" , new_ver);
+    }
 
-  http.open("get", uri);
-  http.send();
+    http.open("get", uri);
+    http.send();
 }
 
 // work with this
 function check_books_version ( p , b ) {
-  ldb.get(`book_${p}_${b}` , function(bk){
-    if(bk == null)  return;
+    ldb.get(`book_${p}_${b}` , function(bk){
+	if(bk == null)  return;
 
-    var localStorage_name = `book_${p}_${b}_update_version`;
-    var old_ver = localStorage.getItem(localStorage_name) || 0;
-    var uri = `https://allekok.com/desktop/update/books/update-version.txt` + "?preventCache="+Date.now();
-    var http = new XMLHttpRequest();
-    http.onload = function () {
-      var new_ver = parseInt(this.responseText);
-      if(old_ver == new_ver)  return;
+	var localStorage_name = `book_${p}_${b}_update_version`;
+	var old_ver = localStorage.getItem(localStorage_name) || 0;
+	var uri = `https://allekok.com/desktop/update/books/update-version.txt` + "?preventCache="+Date.now();
+	var http = new XMLHttpRequest();
+	http.onload = function () {
+	    var new_ver = parseInt(this.responseText);
+	    if(old_ver == new_ver)  return;
 
-      check_book_version( p , b , new_ver , old_ver );
-    }
-    http.open("get", uri);
-    http.send();
-  });
+	    check_book_version( p , b , new_ver , old_ver );
+	}
+	http.open("get", uri);
+	http.send();
+    });
 }
 
 function check_book_version( p , b , new_ver ,old_ver ) {
-  var rb = get_right_format_book(b);
-  var uri = `https://allekok.com/desktop/update/books/update-log.php?ver=${old_ver}&pt=${p}&bk=${rb}` + "&preventCache="+Date.now();
-  var http = new XMLHttpRequest();
+    var rb = get_right_format_book(b);
+    var uri = `https://allekok.com/desktop/update/books/update-log.php?ver=${old_ver}&pt=${p}&bk=${rb}` + "&preventCache="+Date.now();
+    var http = new XMLHttpRequest();
 
-  http.onload = function () {
-    if(this.responseText == "true") {
-      update_book(p , b , new_ver);
+    http.onload = function () {
+	if(this.responseText == "true") {
+	    update_book(p , b , new_ver);
+	}
     }
-  }
 
-  http.open("get" , uri);
-  http.send();
+    http.open("get" , uri);
+    http.send();
 }
 
 function update_book(p,b,new_ver) {
-  var localStorage_baseName = `book_${p}_${b}`;
-  var rb = get_right_format_book(b);
-  var uri = `https://allekok.com/dev/tools/poem.php?poet=${p}&book=${rb}&poem=all&html` + "&preventCache="+Date.now();
-  var http = new XMLHttpRequest();
+    var localStorage_baseName = `book_${p}_${b}`;
+    var rb = get_right_format_book(b);
+    var uri = `https://allekok.com/dev/tools/poem.php?poet=${p}&book=${rb}&poem=all&html` + "&preventCache="+Date.now();
+    var http = new XMLHttpRequest();
 
-  http.onload = function () {
-    ldb.set(localStorage_baseName , this.responseText);
-    localStorage.setItem(`${localStorage_baseName}_update_version` , new_ver);
-  }
+    http.onload = function () {
+	ldb.set(localStorage_baseName , this.responseText);
+	localStorage.setItem(`${localStorage_baseName}_update_version` , new_ver);
+    }
 
-  http.open("get" , uri);
-  http.send();
+    http.open("get" , uri);
+    http.send();
 }
 
 // search
@@ -590,98 +590,95 @@ function search_books (q , pt="all", bk_num=10, k=1, san=0) {
 // tools
 
 function poet_imgs ( arr ) {
-  arr.forEach(function(p) {
-    poet_img(p);
-  });
+    arr.forEach(function(p) {
+	poet_img(p);
+    });
 }
 
 function poet_img(p) {
-  if(localStorage.getItem("index")==null) return;
-  var dist = document.getElementById(`${p}`);
+    if(localStorage.getItem("index")==null) return;
+    var dist = document.getElementById(`${p}`);
 
-  ldb.get(`img_${p}` , function(img) {
+    ldb.get(`img_${p}` , function(img) {
 
-    if(img == null) {
-      get_poet_img(p,dist);
-      var idx = JSON.parse(localStorage.getItem("index"));
-//      dist.src = idx[p].img._130x130;
-    }
-    else {
-      dist.src = "data:image/jpeg;base64," + img;
-    }
-  });
+	if(img == null) {
+	    get_poet_img(p,dist);
+	    var idx = JSON.parse(localStorage.getItem("index"));
+	}
+	else {
+	    dist.src = "data:image/jpeg;base64," + img;
+	}
+    });
 
 }
 
 function get_poet_img (p,dist) {
 
-  var idx = JSON.parse(localStorage.getItem("index"));
-//  var rp =get_right_format_poet(p);
-  var uri = `https://allekok.com/dev/tools/img-to-b64.php?pt=${p}` + "&preventCache="+Date.now();
-  var http = new XMLHttpRequest();
-  http.onload = function () {
-      ldb.set(`img_${p}`, this.responseText);
-      if(dist !==null) dist.src = "data:image/jpeg;base64," + this.responseText;
-      get_poet_img_version();
-  }
-  http.open("get" , uri);
-  http.send();
+    var idx = JSON.parse(localStorage.getItem("index"));
+    var uri = `https://allekok.com/dev/tools/img-to-b64.php?pt=${p}` + "&preventCache="+Date.now();
+    var http = new XMLHttpRequest();
+    http.onload = function () {
+	ldb.set(`img_${p}`, this.responseText);
+	if(dist !==null) dist.src = "data:image/jpeg;base64," + this.responseText;
+	get_poet_img_version();
+    }
+    http.open("get" , uri);
+    http.send();
 }
 
 function get_poet_img_version() {
-  if(localStorage.getItem(`imgs_update_version`) != null) return;
-  var uri = "https://allekok.com/desktop/update/imgs/update-version.txt" + "?preventCache="+Date.now();
-  var http = new XMLHttpRequest();
-  http.onload = function () {
-    localStorage.setItem(`imgs_update_version` , parseInt(this.responseText) );
-  }
+    if(localStorage.getItem(`imgs_update_version`) != null) return;
+    var uri = "https://allekok.com/desktop/update/imgs/update-version.txt" + "?preventCache="+Date.now();
+    var http = new XMLHttpRequest();
+    http.onload = function () {
+	localStorage.setItem(`imgs_update_version` , parseInt(this.responseText) );
+    }
 
-  http.open("get" , uri );
-  http.send();
+    http.open("get" , uri );
+    http.send();
 }
 
 function check_poets_img_update_all () {
-  if(localStorage.getItem("imgs_update_version") == null) return;
-  var uri = "https://allekok.com/desktop/update/imgs/update-version.txt" + "?preventCache="+Date.now();
-  var old_ver = localStorage.getItem("imgs_update_version");
-  var idx = JSON.parse(localStorage.getItem("index"));
-  http = new XMLHttpRequest();
-  http.onload = function () {
-    var new_ver = parseInt(this.responseText);
-      if(old_ver != new_ver) {
-	  for(var p in idx) {
-              check_poet_img_update(idx[p].id , new_ver, old_ver);
-	  }
-      }
-  }
-  http.open("get" , uri);
-  http.send();
+    if(localStorage.getItem("imgs_update_version") == null) return;
+    var uri = "https://allekok.com/desktop/update/imgs/update-version.txt" + "?preventCache="+Date.now();
+    var old_ver = localStorage.getItem("imgs_update_version");
+    var idx = JSON.parse(localStorage.getItem("index"));
+    var http = new XMLHttpRequest();
+    http.onload = function () {
+	var new_ver = parseInt(this.responseText);
+	if(old_ver != new_ver) {
+	    for(var p in idx) {
+		check_poet_img_update(idx[p].id , new_ver, old_ver);
+	    }
+	}
+    }
+    http.open("get" , uri);
+    http.send();
 }
 
 function check_poet_img_update(p , new_ver, old_ver) {
-//  var rp = get_right_format_poet(p);
-  var uri = `https://allekok.com/desktop/update/imgs/update-log.php?ver=${old_ver}&pt=${p}` + "&preventCache="+Date.now();
-  var http = new XMLHttpRequest();
-  http.onload = function () {
-    if(this.responseText == "true") {
-      update_poet_img(p, new_ver);
+    var uri = `https://allekok.com/desktop/update/imgs/update-log.php?ver=${old_ver}&pt=${p}` + "&preventCache="+Date.now();
+    var http = new XMLHttpRequest();
+    http.onload = function () {
+	if(this.responseText == "true") {
+	    update_poet_img(p, new_ver);
+	}
     }
-  }
-  http.open("get" , uri);
-  http.send();
+    http.open("get" , uri);
+    http.send();
 }
 
 function update_poet_img (p, new_ver) {
 
-  var idx = JSON.parse(localStorage.getItem("index"));
-  var uri = `https://allekok.com/dev/tools/img-to-b64.php?pt=${p}` + "&preventCache="+Date.now();
-  var http = new XMLHttpRequest();
-  http.onload = function () {
-    ldb.set(`img_${p}`, this.responseText);
-    localStorage.setItem(`imgs_update_version` , new_ver );
-  }
-  http.open("get" , uri);
-  http.send();
+    var idx = JSON.parse(localStorage.getItem("index"));
+    var uri = `https://allekok.com/dev/tools/img-to-b64.php?pt=${p}` + "&preventCache="+Date.now();
+    var http = new XMLHttpRequest();
+    http.onload = function () {
+	ldb.set(`img_${p}`, this.responseText);
+	localStorage.setItem(`imgs_update_version` , new_ver );
+    }
+    http.open("get" , uri);
+    http.send();
 }
 
 
@@ -703,7 +700,7 @@ function san_data(inp , lastChance=false) {
     if (inp == "")  return "";
 
     var extras = [/&laquo;/g,/&raquo;/g,/&rsaquo;/g,/&lsaquo;/g,/&bull;/g,/&nbsp;/g,/\?/g, /!/g, /#/g, /&/g, /\*/g, /\(/g, /\)/g, /-/g, /\+/g, /=/g, /_/g,/\[/g, /\]/g, /{/g, /}/g,/</g,/>/g, /\//g, /\|/, /\'/g, /\"/g, /;/g, /:/g, /,/g, /\./g, /~/g, /`/g,/؟/g, /،/g, /»/g, /«/g, /ـ/g, /›/g, /‹/g, /•/g, /‌/g, /\s+/g, 
-    /؛/g,
+		  /؛/g,
     ];
     var ar_signs =['ِ', 'ُ', 'ٓ', 'ٰ', 'ْ', 'ٌ', 'ٍ', 'ً', 'ّ', 'َ'];
 
@@ -817,10 +814,10 @@ function save_fs(how) {
         if(fs >= 120){
             return;
         }
-    
-    newfs = fs + scale;
+	
+	newfs = fs + scale;
 
-    /// make font size smaller
+	/// make font size smaller
     } else if(hows.indexOf(how) === 0){
         if(fs<=6){
             return;
@@ -832,12 +829,12 @@ function save_fs(how) {
     hon.style.fontSize = newfs + "px";
 }
 function get_fs() {
-	var lsfs = localStorage.getItem('fontsize');
-  var hhon = document.getElementById('poem_context');
-  if (lsfs != null && !isNaN(lsfs) && hhon !=null) {      
-      
-      hhon.style.fontSize=lsfs+'px';
-	}
+    var lsfs = localStorage.getItem('fontsize');
+    var hhon = document.getElementById('poem_context');
+    if (lsfs != null && !isNaN(lsfs) && hhon !=null) {      
+	
+	hhon.style.fontSize=lsfs+'px';
+    }
 }
 
 function set_location(obj) {
