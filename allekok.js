@@ -50,6 +50,7 @@ function index(k = "dead") {
         </footer>`;
 	
 	document.querySelector("header").style.borderTop = `.6em solid transparent`;
+	document.querySelector("header h1").style.color = "rgb(0,210,50)";
         t.innerHTML = res;
         t.style.animation = "fade .2s";
 
@@ -179,6 +180,7 @@ function poet(p) {
     res += `</div>`;
     
     document.querySelector("header").style.borderTop = `.6em solid ${p.colors[0]}`;
+    document.querySelector("header h1").style.color = "#444";
     t.innerHTML = res;
     t.style.animation = "fade .2s";
 
@@ -239,6 +241,7 @@ function book(p , b) {
             res += `</div>`;
 
 	    document.querySelector("header").style.borderTop = `.6em solid ${pt.colors[0]}`;
+	    document.querySelector("header h1").style.color = "#444";
             t.innerHTML = res;
             t.style.animation = "fade .2s";
 
@@ -362,6 +365,7 @@ function poem (p , b , m) {
 	}
 
 	document.querySelector("header").style.borderTop = `.6em solid ${pt.colors[0]}`;
+	document.querySelector("header h1").style.color = "#444";
 	t.innerHTML = res;
 	t.style.animation = "fade .2s";
 	get_fs();
