@@ -1,6 +1,6 @@
 # allekok desktop application
-Allekok desktop application stable releases can be found here: https://github.com/allekok/allekok-desktop/releases  
-For running || building from the source code, Install dependencies that mentioned below and then read the following instructions.
+The stable releases of Allekok desktop application could be found here: https://github.com/allekok/allekok-desktop/releases  
+For running or building from source code, Install main dependencies that mentioned below and then read the following instruction.
 ## Dependencies
 - node.js
 - npm or yarn
