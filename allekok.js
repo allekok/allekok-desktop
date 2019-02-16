@@ -202,10 +202,10 @@ function book(p , b) {
     ldb.get(localStorage_name , function(bk) {
 	res = "";
 
-	if( bk == null ) {
+	if( bk == null || !isJSON(bk)) {
             get_book(p , b);
 	}
-	else if( isJSON(bk) ) {
+	else {
 
 	    var idx = JSON.parse(localStorage.getItem("index"));
             bk = JSON.parse(bk);
