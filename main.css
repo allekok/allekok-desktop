@@ -1,291 +1,290 @@
 html, body {
-  height:100%;
+    height:100%;
 }
 
 @font-face{font-family:'kurd';font-style:normal;font-weight:400;src:url('./font/DroidNaskh-Regular.woff') format('woff');font-display:swap;}
 
 body {
-  margin:0;
-  font-family:'kurd';
-  font-size: 12px;
-  background-color:#fafafa;
-  box-sizing: border-box;
-  line-height:2.5;
+    margin:0;
+    font-family:'kurd';
+    font-size: 12px;
+    background-color:#fafafa;
+    box-sizing: border-box;
+    line-height:2.5;
 }
 
 div, header, footer, h1, h2, h3, a, img, button {
-  font-family: inherit;
-  box-sizing: border-box;
-  transition: all .2s;
-  -webkit-transition: all .2s;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: all .2s;
+    -webkit-transition: all .2s;
 }
 
 a {
-  text-decoration: none;
-  display: inline-block;
+    text-decoration: none;
+    display: inline-block;
 }
 
 input, textarea, button {
-  appearance: none;
-  -webkit-appearance: none;
+    appearance: none;
+    -webkit-appearance: none;
 }
 
 button {
-  background: none;
-  border: 0;
-  box-shadow: none;
-  cursor: pointer;
-  padding: 0;
-  outline:0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+    cursor: pointer;
+    padding: 0;
+    outline:0;
 }
 
 h1, h2, h3, p {
-  font-weight: normal;
-  margin:0;
+    font-weight: normal;
+    margin:0;
 }
 
 img {
-  display: block;
+    display: block;
 }
 
 header {
-  text-align: center;
-  -webkit-app-region:drag;
+    text-align: center;
+    -webkit-app-region:drag;
 }
 
 header button:hover {
-  opacity: .8;
+    opacity: .8;
 }
 header h1 {
-  font-size: 2em;
-  padding: 1em 0 0;
-  color:rgb(0,210,50);
+    font-size: 2em;
+    padding: 1em 0 0;
+    color:#555;
 }
 
 #main {
-  padding:2em 1em;
-  margin:auto;
-  text-align: center;
+    padding:2em 1em;
+    margin:auto;
+    text-align: center;
 }
 
 .poet {
-  display: inline-block;
-  width: 23%;
-  max-width: 100px;
-  margin:1em 1%;
-  cursor:pointer;
+    display: inline-block;
+    width: 23%;
+    max-width: 100px;
+    margin:1em 1%;
+    cursor:pointer;
 }
 .poet:hover {
-  opacity:.8;
+    opacity:.8;
 }
 .poet img {
-  width:100%;
-  border-radius: 100%;
-  box-shadow: 0 3px 4px -3px #aaa;
+    width:100%;
+    border-radius: 100%;
+    box-shadow: 0 3px 4px -3px #aaa;
 }
 .poet h3 {
-  text-align: center;
-  color: #444;
-  overflow:hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+    text-align: center;
+    color: #444;
+    overflow:hidden;
+    white-space: nowrap;
 }
 
 @media only screen and (min-width:600px) {
-  body {
-    font-size: 16px;
-  }
-  #main {
-    max-width: 1200px;
-  }
+    body {
+	font-size: 16px;
+    }
+    #main {
+	max-width: 1200px;
+    }
 }
 
 @media only screen and (min-width:970px) {
-  .poet {
-    max-width:130px;
-  }
+    .poet {
+	max-width:130px;
+    }
 }
 
 footer {
-  font-size:1.2em;
-  text-align: center;
-  margin: 1em 0 1.5em;
+    font-size:1.2em;
+    text-align: center;
+    margin: 1em 0 1.5em;
 }
 footer a, footer button {
-  font-size: inherit;
-  padding:1em .2em;
-  margin:0 .3em;
-  border-bottom: 1px solid #ddd;
-  color:#555;
+    font-size: inherit;
+    padding:1em .2em;
+    margin:0 .3em;
+    border-bottom: 1px solid #ddd;
+    color:#555;
 }
 footer a:hover, footer button:hover {
-  background-color: #eee;
-  border-bottom: 0;
+    background-color: #eee;
+    border-bottom: 0;
 }
 
 #adrs {
-  font-size:1.5em;
+    font-size:1.5em;
 }
 #current_location {
-  display: inline-block;
-  color: #666;
-  padding:1em .5em;
+    display: inline-block;
+    color: #666;
+    padding:1em .5em;
 }
 #adrs button {
-  font-size: inherit;
-  color: #000;
-  padding:1em .5em;
+    font-size: inherit;
+    color: #000;
+    padding:1em .5em;
 }
 #adrs button:hover {
-  background-color: #eee;
+    background-color: #eee;
 }
 
 #poet_pic img {
-  margin: auto;
-  border-radius:100%;
-  box-shadow: 0 3px 4px -3px #aaa;
-  max-width: 100%;
+    margin: auto;
+    border-radius:100%;
+    box-shadow: 0 3px 4px -3px #aaa;
+    max-width: 100%;
 }
 #poet_books {
-  max-width: 500px;
-  margin: auto;
-  background-color: #fff;
-  border:1px solid #eee;
-  box-shadow: 0 0 10px #eee;
+    max-width: 500px;
+    margin: auto;
+    background-color: #fff;
+    border:1px solid #eee;
+    box-shadow: 0 0 10px #eee;
 }
 #poet_books p {
-  font-size: 1.4rem;
-  border-bottom:1px solid #eee;
-  padding:1em 0;
-  background-color: #f9f9f9;
+    font-size: 1.4rem;
+    border-bottom:1px solid #eee;
+    padding:1em 0;
+    background-color: #f9f9f9;
 }
 #poet_books button {
-  font-size: 1.4rem;
-  display: block;
-  text-align: center;
-  width: 100%;
-  padding:1.5em 0;
-  color: #000;
-  border-bottom:1px solid #f4f4f4;
+    font-size: 1.4rem;
+    display: block;
+    text-align: center;
+    width: 100%;
+    padding:1.5em 0;
+    color: #000;
+    border-bottom:1px solid #f4f4f4;
 }
 #poet_books button:hover {
-  background-color: #eee;
+    background-color: #eee;
 }
 #poet_info {
-  padding-top:2em;
-  text-align: right;
-  max-width: 500px;
-  margin: auto;
-  font-size: 1.3em;
+    padding-top:2em;
+    text-align: right;
+    max-width: 500px;
+    margin: auto;
+    font-size: 1.3em;
 }
 .poet_info_row {
-  padding: 1em 2em;
-  border-bottom: 1px solid #eee
+    padding: 1em 2em;
+    border-bottom: 1px solid #eee
 }
 
 .pm {
-  display: block;
-  color:#000;
-  padding:1em;
-  font-size: 1.5em;
-  border-bottom: 1px solid #eee;
-  width: 100%;
-  text-align: right;
+    display: block;
+    color:#000;
+    padding:1em;
+    font-size: 1.5em;
+    border-bottom: 1px solid #eee;
+    width: 100%;
+    text-align: right;
 }
 .pm:hover {
-  background-color: #eee;
+    background-color: #eee;
 }
 #poem_desc {
-  background-color:#eee;
-  padding: 1em 0;
-  font-size: 1.1em;
-  margin-top:3em;
+    background-color:#eee;
+    padding: 1em 0;
+    font-size: 1.1em;
+    margin-top:3em;
 }
 #poem_context {
-  font-size: 1.3em;
-  padding:2em 0 1em;
+    font-size: 1.3em;
+    padding:2em 0 1em;
 }
 #poem_context sup {
-  color:#666;
+    color:#666;
 }
 .b {
-  margin-bottom: 1.5em;
+    margin-bottom: 1.5em;
 }
 .n, .m {
-  text-align: right;
+    text-align: right;
 }
 .cf {
-  background-color:#eee;
-  color: #333;
-  padding: 1em;
+    background-color:#eee;
+    color: #333;
+    padding: 1em;
 }
 .d {
-  font-size: .85em;
+    font-size: .85em;
 }
 .m.d.cf {
-  text-indent: 1em;
+    text-indent: 1em;
 }
 .ptr {
-  background-color: #f4f4f4;
-  padding:1em 0;
-  margin-top:1em;
+    background-color: #f4f4f4;
+    padding:1em 0;
+    margin-top:1em;
 }
 #poem_nav {
-  margin:1em 0;
+    margin:1em 0;
 }
 #poem_nav button {
-  font-size: 3em;
-  padding: 0 1em;
+    font-size: 3em;
+    padding: 0 1em;
 }
 #poem_nav button:hover {
-  background-color: #eee;
+    background-color: #eee;
 }
 #poem_nav button:active {
-  background-color:#ddd;
+    background-color:#ddd;
 }
 #nav_next {
-  margin-right:1em;
+    margin-right:1em;
 }
 @keyframes fade {
-	from {
+    from {
 	opacity:0;
-	}
-	to {
+    }
+    to {
 	opacity:1;
-	}
+    }
 }
 @keyframes load {
-  from {
-    transform:rotate(0deg)
-  }
-  to {
-    transform:rotate(360deg)
-  }
+    from {
+	transform:rotate(0deg)
+    }
+    to {
+	transform:rotate(360deg)
+    }
 }
 
 .loading {
-  width:6em;
-  height:6em;
-  border-radius:100%;
-  border:2px solid #eee;
-  border-top:2px solid #aaa;
-  animation:load .8s infinite linear;
-  margin:auto;
+    width:6em;
+    height:6em;
+    border-radius:100%;
+    border:2px solid #eee;
+    border-top:2px solid #aaa;
+    animation:load .8s infinite linear;
+    margin:auto;
 }
 
 #poem_tools button {
-  font-size: 1.5em;
-  background-color:#f3f3f3;
-  color:#555;
-  padding:1em;
+    font-size: 1.5em;
+    background-color:#f3f3f3;
+    color:#555;
+    padding:1em;
 }
 #fs_smaller {
-  margin-right:2em;
+    margin-right:2em;
 }
 #poem_tools button:hover {
-  background-color:#eee;
+    background-color:#eee;
 }
 #poem_tools button:active {
-  background-color:#ddd;
+    background-color:#ddd;
 }
 

@@ -1,46 +1,51 @@
-// consts
+/** Constants **/
 const loading = "<div class='loading'></div>";
+// Loading animation
 const progressBar = "<progress class='prb'></progress>";
+// Progressing animation
 
-// https://github.com/DVLP/localStorageDB
+/** A simple (key, value) interface for indexedDB.
+   /** Source Code: https://github.com/DVLP/localStorageDB **/
 !function(){function e(t,o){return n?void(n.transaction("s").objectStore("s").get(t).onsuccess=function(e){var t=e.target.result&&e.target.result.v||null;o(t)}):void setTimeout(function(){e(t,o)},100)}var t=window.indexedDB||window.mozIndexedDB||window.webkitIndexedDB||window.msIndexedDB;if(!t)return void console.error("indexDB not supported");var n,o={k:"",v:""},r=t.open("d2",1);r.onsuccess=function(e){n=this.result},r.onerror=function(e){console.error("indexedDB request error"),console.log(e)},r.onupgradeneeded=function(e){n=null;var t=e.target.result.createObjectStore("s",{keyPath:"k"});t.transaction.oncomplete=function(e){n=e.target.db}},window.ldb={get:e,set:function(e,t){o.k=e,o.v=t,n.transaction("s","readwrite").objectStore("s").put(o)}}}();
 
 
-// index
-
+/** Allekok's first page **/
 function index(k = "dead") {
 
-    var idx = localStorage.getItem("index");
-    var t = document.querySelector("#main");
-    var res = "";
+    var idx = localStorage.getItem("index"),
+	t = document.querySelector("#main"),
+	res = "";
+    
     t.style.animation = "none";
     void t.offsetWidth;
+    // Refreshing `t` element for animation.
     t.innerHTML = loading;
 
-    if(idx == null) {
+    if( ! index_valid() ) {
         get_index();
+	return;
     }
-    else if ( index_valid() ) {
 
-        idx = JSON.parse(idx);
+    
+    var idx = JSON.parse(idx),
+	arr = [];
+    
+    for(var p = 0; p<idx.length; p++) {
 
-	var arr = [];
-        for(var p = 0; p<idx.length; p++) {
-
-            if(k == idx[p].kind) {
-                res += `<div role='button' onclick='poet(${idx[p].id})' class='poet'>
+        if(k == idx[p].kind) {
+            res += `<div role='button' onclick='poet(${idx[p].id})' class='poet'>
                 <img id='${idx[p].id}' src='back.jpg' alt='${idx[p].profname}'>
                 <h3 title='${idx[p].profname}'>${idx[p].takh}</h3>
                 </div>`;
 
-		arr.push(idx[p].id);
-            }
+	    arr.push(idx[p].id);
         }
+    }
 
-	var nk = (k == "alive") ? "dead" : "alive";
-	var nk_title = (k == "alive") ? "شاعیرانی کۆچ‌کردوو" : "شاعیرانی نوێ";
-	
-        res += `<footer>
+    var nk = (k == "alive") ? "dead" : "alive",
+	nk_title = (k == "alive") ? "شاعیرانی کۆچ‌کردوو" : "شاعیرانی نوێ";
+    
+    res += `<footer>
             <button type="button" onclick="index('${nk}');">
                 ${nk_title}
             </button>
@@ -48,22 +53,22 @@ function index(k = "dead") {
                 بەیتی کوردی
             </button>
         </footer>`;
-	
-	document.querySelector("header").style.borderTop = `.6em solid transparent`;
-	document.querySelector("header h1").style.color = "rgb(0,210,50)";
-        t.innerHTML = res;
-        t.style.animation = "fade .2s";
+    
+    document.querySelector("header").style.borderTop = `.6em solid #15c314`;
+    t.innerHTML = res;
+    t.style.animation = "fade .2s";
 
-	var location = {ki:"index", kind:k};
-        set_location(location);
+    var location = {ki:"index", kind:k};
+    set_location(location);
 
-        poet_imgs(arr);
-    }
+    poet_imgs(arr);
+
 }
 
 function index_valid() {
     var idx = localStorage.getItem("index");
 
+    if( idx === null ) return false;
     if( ! isJSON(idx) ) return false;
     /*
      * more validation tests.
@@ -87,7 +92,8 @@ function isJSON (json) {
 function get_index() {
     var uri = "https://allekok.com/dev/tools/poet.php?poet=all" + "&preventCache="+Date.now();
     var http = new XMLHttpRequest();
-
+    
+    http.open("get" , uri);
     http.onload = function () {
         var res = this.responseText;
 
@@ -95,8 +101,7 @@ function get_index() {
         get_index_version();
         index();
     }
-
-    http.open("get" , uri);
+    
     http.send();
 }
 
@@ -123,16 +128,16 @@ function bayt() {
 // poet
 
 function poet(p) {
-    var idx = localStorage.getItem("index");
-    var t = document.querySelector("#main");
-    var res = "";
-    var _p = p;
+    var idx = localStorage.getItem("index"),
+	t = document.querySelector("#main"),
+	res = "",
+	_p = p;
 
     t.style.animation = "none";
     void t.offsetWidth;
     t.innerHTML = loading;
 
-    if(idx == null || ! index_valid()) {
+    if(! index_valid()) {
         index();
         return;
     }
@@ -145,7 +150,7 @@ function poet(p) {
 	}
     }
 
-    if(p == null) {
+    if(p === null) {
         index();
         return;
     }
@@ -180,7 +185,6 @@ function poet(p) {
     res += `</div>`;
     
     document.querySelector("header").style.borderTop = `.6em solid ${p.colors[0]}`;
-    document.querySelector("header h1").style.color = "#444";
     t.innerHTML = res;
     t.style.animation = "fade .2s";
 
@@ -241,7 +245,6 @@ function book(p , b) {
             res += `</div>`;
 
 	    document.querySelector("header").style.borderTop = `.6em solid ${pt.colors[0]}`;
-	    document.querySelector("header h1").style.color = "#444";
             t.innerHTML = res;
             t.style.animation = "fade .2s";
 
@@ -365,7 +368,6 @@ function poem (p , b , m) {
 	}
 
 	document.querySelector("header").style.borderTop = `.6em solid ${pt.colors[0]}`;
-	document.querySelector("header h1").style.color = "#444";
 	t.innerHTML = res;
 	t.style.animation = "fade .2s";
 	get_fs();
