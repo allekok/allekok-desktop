@@ -170,7 +170,10 @@ function poet(p) {
 
     var bks = p.bks;
     for(var b = 0; b < bks.length; b++) {
-        res += `<button type='button' onclick='check_books_version(${_p},${b});book(${_p},${b});'>${bks[b]}</button>`; 
+        res += `<button type='button' onclick='check_books_version(${_p},${b});book(${_p},${b});'>${bks[b]}`;
+	if(localStorage.getItem(`book_${_p}_${b}_update_version`) !== null)
+	    res += `<i style='padding:0 .3em;vertical-align:middle;color:${p.colors[0]}' class='material-icons'>file_download</i>`;
+	res += "</button>";
     }
 
     res += `</div>

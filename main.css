@@ -2,7 +2,9 @@ html, body {
     height:100%;
 }
 
-@font-face{font-family:'kurd';font-style:normal;font-weight:400;src:url('./font/DroidNaskh-Regular.woff') format('woff');font-display:swap;}
+@font-face{font-family:'kurd';font-display:swap;font-style:normal;font-weight:400;src:url('./font/DroidNaskh-Regular.woff') format('woff')}
+@font-face{font-family:'Material Icons';font-display:swap;font-style:normal;font-weight:400;src:url('./font/Material-Icons.woff2') format('woff2')}
+.material-icons{font-family:'Material Icons';direction:ltr;line-height:1;display:inline-block;-moz-font-feature-settings:'liga';-moz-osx-font-smoothing:grayscale;font-style:normal}
 
 body {
     margin:0;
