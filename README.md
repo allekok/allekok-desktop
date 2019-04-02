@@ -1,6 +1,6 @@
 # allekok desktop application
 The stable releases of Allekok desktop application could be found here: https://github.com/allekok/allekok-desktop/releases  
-For running or building from source code, Install main dependencies that mentioned below and then read the following instruction.
+For building from source code, Install dependencies and then follow the instructions mentioned in "Using" section.
 ## Dependencies
 - node.js
 - npm or yarn
@@ -11,15 +11,6 @@ git clone https://github.com/allekok/allekok-desktop.git
 cd allekok-desktop
 npm install
 npm start
-```
-For building a distribution package:
-```bash
-# linux
-npm dist --linux --x64 AppImage
-# windows
-npm dist --win --x64 exe
-# mac os
-npm dist --mac --x64 dmg
 ```
 
 **using yarn**
@@ -38,4 +29,4 @@ yarn dist --win --x64 exe
 # mac os
 yarn dist --mac --x64 dmg
 ```
-For more information on how to build distributions check out: https://github.com/electron-userland/electron-builder  
+For more information on how to build packages check out: https://github.com/electron-userland/electron-builder  
