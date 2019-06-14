@@ -9,7 +9,7 @@ const progressBar = "<progress class='prb'></progress>";
 !function(){function e(t,o){return n?void(n.transaction("s").objectStore("s").get(t).onsuccess=function(e){var t=e.target.result&&e.target.result.v||null;o(t)}):void setTimeout(function(){e(t,o)},100)}var t=window.indexedDB||window.mozIndexedDB||window.webkitIndexedDB||window.msIndexedDB;if(!t)return void console.error("indexDB not supported");var n,o={k:"",v:""},r=t.open("d2",1);r.onsuccess=function(e){n=this.result},r.onerror=function(e){console.error("indexedDB request error"),console.log(e)},r.onupgradeneeded=function(e){n=null;var t=e.target.result.createObjectStore("s",{keyPath:"k"});t.transaction.oncomplete=function(e){n=e.target.db}},window.ldb={get:e,set:function(e,t){o.k=e,o.v=t,n.transaction("s","readwrite").objectStore("s").put(o)}}}();
 
 
-/** Allekok's first page **/
+/** Allekok first page **/
 function index(k = "dead") {
 
     var idx = localStorage.getItem("index"),
@@ -54,8 +54,8 @@ function index(k = "dead") {
             </button>
         </footer>`;
     
-    document.querySelector("header").style.borderTop = `.6em solid #15c314`;
     t.innerHTML = res;
+    t.style.paddingTop = "2em";
     t.style.animation = "fade .2s";
 
     var location = {ki:"index", kind:k};
@@ -163,22 +163,25 @@ function poet(p) {
     <div id='current_location'>${p.profname}</div>
     </div>
     <div id='poet_books'>
-    <p style='background-color:${p.colors[0]}; color:${p.colors[1]};'>
+    <p>
     بەرهەمەکانی
-    ${p.profname}
+    ${p.profname}:
     </p>`;
 
     var bks = p.bks;
     for(var b = 0; b < bks.length; b++) {
-        res += `<button type='button' onclick='check_books_version(${_p},${b});book(${_p},${b});'>${bks[b]}`;
+        res += `<button type='button' onclick='check_books_version(${_p},${b});book(${_p},${b});'>${num_convert((b+1).toString())}. ${bks[b]}`;
 	if(localStorage.getItem(`book_${_p}_${b}_update_version`) !== null)
-	    res += `<i style='padding:0 .3em;vertical-align:middle;color:${p.colors[0]}' class='material-icons'>file_download</i>`;
+	    res += `<i style='padding:0 .3em;vertical-align:middle;color:#15c314' class='material-icons'>file_download</i>`;
 	res += "</button>";
     }
 
     res += `</div>
     </div>
-    <div id='poet_info'>`;
+    <div id='poet_info'>
+    <p>
+    سەبارەت: 
+    </p>`;
 
     var hdesc = p.hdesc;
     for(var h = 0; h < hdesc.length; h++) {
@@ -187,7 +190,6 @@ function poet(p) {
 
     res += `</div>`;
     
-    document.querySelector("header").style.borderTop = `.6em solid ${p.colors[0]}`;
     t.innerHTML = res;
     t.style.animation = "fade .2s";
 
@@ -247,7 +249,6 @@ function book(p , b) {
 
             res += `</div>`;
 
-	    document.querySelector("header").style.borderTop = `.6em solid ${pt.colors[0]}`;
             t.innerHTML = res;
             t.style.animation = "fade .2s";
 
@@ -370,7 +371,6 @@ function poem (p , b , m) {
       	    res += `<div id='poem_desc'>${pm.hdesc}</div>`;
 	}
 
-	document.querySelector("header").style.borderTop = `.6em solid ${pt.colors[0]}`;
 	t.innerHTML = res;
 	t.style.animation = "fade .2s";
 	get_fs();
