@@ -7,16 +7,16 @@ For building from source code, Install dependencies and then follow the instruct
 ## Using
 **using npm**
 ```bash
-git clone https://github.com/allekok/allekok-desktop.git
-cd allekok-desktop
+git clone https://github.com/allekok/allekok-desktop.git && cd allekok-desktop
+git submodule init && git submodule update
 npm install
 npm start
 ```
 
 **using yarn**
 ```bash
-git clone https://github.com/allekok/allekok-desktop.git
-cd allekok-desktop
+git clone https://github.com/allekok/allekok-desktop.git && cd allekok-desktop
+git submodule init && git submodule update
 yarn install
 yarn start
 ```
