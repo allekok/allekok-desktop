@@ -1,4 +1,4 @@
-# allekok desktop application
+# بەرنامەی دێسکتاپی ئاڵەکۆک
 The stable releases of Allekok desktop application could be found here: https://github.com/allekok/allekok-desktop/releases  
 For building from source code, Install dependencies and then follow the instructions mentioned in "Using" section.
 ## Dependencies
