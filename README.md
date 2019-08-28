@@ -1,6 +1,9 @@
 # بەرنامەی دێسکتاپی ئاڵەکۆک
-The stable releases of Allekok desktop application could be found here: https://github.com/allekok/allekok-desktop/releases  
-For building from source code, Install dependencies and then follow the instructions mentioned in "Using" section.
+بۆ داگرتنی وەشانەکانی جۆراوجۆری بەرنامەی دێسکتاپی ئاڵەکۆک،
+سەردانی لاپەڕەی خوارەوە بکەن:  
+[دابەزاندنی بەرنامەی دێسکتاپی
+ئاڵەکۆک](https://github.com/allekok/allekok-desktop/releases)  
+بۆ دروست‌کردنی بەرنامەی دێسکتاپی ئاڵەکۆک، خوارەوە وەخوێنن:  
 ## Dependencies
 - node.js
 - npm or yarn
