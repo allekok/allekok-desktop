@@ -24,7 +24,7 @@
   resolved "https://registry.yarnpkg.com/@types/debug/-/debug-4.1.5.tgz#b14efa8852b7768d898906613c23f688713e02cd"
   integrity sha512-Q1y515GcOdTHgagaVFhHnIFQ38ygs/kmxdNpvpou+raI9UO3YZcHDngBSYKQklcKlvA7iuQlmIKbzvmxcOE9CQ==
 
-"@types/node@^10.1.4":
+"@types/node@^10.12.18":
   version "10.14.16"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.14.16.tgz#4d690c96cbb7b2728afea0e260d680501b3da5cf"
   integrity sha512-/opXIbfn0P+VLt+N8DE4l8Mn8rbhiJgabU96ZJ0p9mxOkIks5gh6RUnpHak7Yh0SFkyjO/ODbxsQQPV2bpMmyA==
@@ -589,12 +589,12 @@ electron-publish@20.44.4:
     lazy-val "^1.0.4"
     mime "^2.4.4"
 
-electron@^3.0.0:
-  version "3.1.13"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-3.1.13.tgz#aeb276f4cf5e3785078b6495e982ee46d553a5d2"
-  integrity sha512-aRNywoUSO1Va/lpU4nz3K6GDyFqYtlOnHGLcERAAHfhB+IJrJ34cUJW4FVBpm43AwvUdAeuCkVKRLtOmrgx5CA==
+electron@^4.0.0:
+  version "4.2.9"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-4.2.9.tgz#81226aa1ba58e1b05388474faf5a815010a11ea2"
+  integrity sha512-zC7K3GOiZKmxqllVG/qq/Gx+qQvyolKj5xKKwXMqIGekfokEW2hvoIO5Yh7KCoAh5dqBtpzOJjS4fj1se+YBcg==
   dependencies:
-    "@types/node" "^10.1.4"
+    "@types/node" "^10.12.18"
     electron-download "^4.1.0"
     extract-zip "^1.0.3"
 
