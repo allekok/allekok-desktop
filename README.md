@@ -3,6 +3,7 @@
 # بەرنامەی دێسکتاپی ئاڵەکۆک
 ## پێویستییەکان
 </div>
+
 - node.js
 - npm or yarn
 
@@ -10,6 +11,7 @@
 
 ## بەکارهێنان
 </div>
+
 ```bash
 git clone https://github.com/allekok/allekok-desktop.git && cd allekok-desktop
 git submodule init && git submodule update
@@ -21,6 +23,7 @@ git submodule init && git submodule update
 
 ## ساز کردنی وەشانی نوێ
 </div>
+
 ```bash
 # linux
 yarn dist --linux --x64 AppImage
